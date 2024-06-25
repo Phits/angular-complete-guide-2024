@@ -1,5 +1,17 @@
 import { Component, EventEmitter, Input, Output, computed, input, output } from '@angular/core';
 
+// type User = {
+//   id: string;
+//   avatar: string;
+//   name: string;
+// }
+
+interface User {
+  id: string;
+  avatar: string;
+  name: string;
+}
+
 @Component({
   selector: 'app-user',
   standalone: true,
@@ -8,9 +20,7 @@ import { Component, EventEmitter, Input, Output, computed, input, output } from 
 })
 export class UserComponent {
   // Traditional
-  @Input({ required: true }) id!: string;
-  @Input({ required: true }) avatar!: string;
-  @Input({ required: true }) name!: string;
+  @Input({ required: true }) user!: User;
   @Output() select = new EventEmitter<string>();
 
   // New way to do it but not a signal
@@ -18,11 +28,11 @@ export class UserComponent {
   // select = output<string>();
 
   get imagePath() {
-    return `assets/users/${this.avatar}`;
+    return `assets/users/${this.user.avatar}`;
   }
 
   onSelectUser() { 
-    this.select.emit(this.id);
+    this.select.emit(this.user.id);
   }
 
   // Signals Inputs
