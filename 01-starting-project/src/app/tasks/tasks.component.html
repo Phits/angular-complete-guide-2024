@@ -2,22 +2,17 @@
 
     <header>
         <p>{{ name }}'s Tasks</p>
+        <menu>
+            <button>Add Task</button>
+        </menu>
     </header>
 
-    <menu>
-        <button>Add Task</button>
-    </menu>
-
-    <ul class="ul">
+    <ul>
+        @for (task of selectedUserTasks; track task.id){
         <li>
-            <app-task></app-task>
+            <app-task [task]="task" />
         </li>
-        <li>
-            <app-task></app-task>
-        </li>
-        <li>
-            <app-task></app-task>
-        </li>
+        }
     </ul>
 
 </section>
