@@ -5,7 +5,7 @@
     <!-- Only on Angular 17 -->
     @for (user of users; track user.id) {
     <li>
-      <app-user [user]="user" (select)="onSelectUser($event)" />
+      <app-user [selected]="user.id === selectedUserId" [user]="user" (select)="onSelectUser($event)" />
     </li>
     }
 
