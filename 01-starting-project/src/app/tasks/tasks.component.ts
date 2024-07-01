@@ -1,14 +1,13 @@
 import { Component, Input } from '@angular/core';
 import { TaskComponent } from "./task/task.component";
 import { NewTaskComponent } from '../new-task/new-task.component';
-import { AddTaskComponent } from '../tasks/add-task/add-task.component';
 
 @Component({
   selector: 'app-tasks',
   standalone: true,
   templateUrl: './tasks.component.html',
   styleUrl: './tasks.component.css',
-  imports: [TaskComponent, NewTaskComponent, AddTaskComponent]
+  imports: [TaskComponent, NewTaskComponent]
 })
 export class TasksComponent {
   @Input({ required: true }) userId!: string;
@@ -62,5 +61,9 @@ export class TasksComponent {
       summary: 'This is a new task',
       dueDate: '2024-06-15',
     });
+  }
+
+  onCancelAddTask() {
+    this.isAddingTask = false;
   }
 }
