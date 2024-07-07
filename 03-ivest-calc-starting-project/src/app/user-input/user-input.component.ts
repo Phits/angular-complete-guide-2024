@@ -1,5 +1,7 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, output, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+
+import { InvestmentInput } from '../investment-input.model';
 
 @Component({
   selector: 'app-user-input',
@@ -9,32 +11,32 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './user-input.component.css'
 })
 export class UserInputComponent {
-  @Output() calculate = new EventEmitter<{
-    initialInvestment: number,
-    annualInvestment: number,
-    expectedReturn: number,
-    duration: number
-  }>();
+  calculate = output<InvestmentInput>();
 
-  enteredIntialInvestment = '0';
-  enteredAnnualInvestment = '0';
-  enteredExpectedReturn = '5';
-  enteredDuration = '10';
+  // Without Singals
+  // @Output() calculate = new EventEmitter<InvestmentInput>();
+
+  enteredIntialInvestment = signal(0);
+  annualInvestment = signal(0);
+  expectedReturn = signal(5);
+  duration = signal(10);
 
   onSubmit() {
-    console.log('submitted');
-    console.log('enteredIntialInvestment ', this.enteredIntialInvestment);
-    console.log('enteredAnnualInvestment ', this.enteredAnnualInvestment);
-    console.log('enteredExpectedReturn ', this.enteredExpectedReturn);
-    console.log('enteredDuration ', this.enteredDuration);
-
     this.calculate.emit(
       {
-        initialInvestment: +this.enteredIntialInvestment,
-        annualInvestment: +this.enteredAnnualInvestment,
-        expectedReturn: +this.enteredExpectedReturn,
-        duration: +this.enteredDuration
-      })
+        initialInvestment: +this.enteredIntialInvestment(),
+        annualInvestment: +this.annualInvestment(),
+        expectedReturn: +this.expectedReturn(),
+        duration: +this.duration()
+      });
+    this.enteredIntialInvestment.set(0);
+    this.annualInvestment.set(0);
+    this.expectedReturn.set(5);
+    this.duration.set(10);
   }
 
 }
+function singal(arg0: number): number {
+  throw new Error('Function not implemented.');
+}
+
