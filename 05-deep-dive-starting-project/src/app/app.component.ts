@@ -3,11 +3,12 @@ import { HeaderComponent } from './header/header.component';
 import { ServerStatusComponent } from './dashboard/server-status/server-status.component';
 import { TicketsComponent } from './dashboard/tickets/tickets.component';
 import { TrafficComponent } from './dashboard/traffic/traffic.component';
+import { DashboardItemComponent } from './dashboard/dashboard-item/dashboard-item.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [HeaderComponent, TrafficComponent, ServerStatusComponent, TicketsComponent],
+  imports: [HeaderComponent, DashboardItemComponent, TrafficComponent, ServerStatusComponent, TicketsComponent],
   templateUrl: './app.component.html',
 })
 export class AppComponent {
