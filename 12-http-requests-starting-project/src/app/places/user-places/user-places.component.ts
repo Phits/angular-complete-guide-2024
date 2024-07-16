@@ -17,20 +17,19 @@ export class UserPlacesComponent {
   isFetching = signal(false);
   error = signal('');
   private placesService = inject(PlacesService);
-  private destroyRef = inject(DestroyRef)
+  private destroyRef = inject(DestroyRef);
 
   ngOnInit() {
     this.isFetching.set(true);
-    const subscription = this.placesService.loadUserPlaces()
-      .subscribe({
-        next: (places: Place[] | undefined) => {
-          this.places.set(places);
-        },
-        error: (error: { message: string; }) => {
-          this.error.set(error.message);
-        },
-        complete: () => this.isFetching.set(false),
-      });
+    const subscription = this.placesService.loadUserPlaces().subscribe({
+      next: (places) => {
+        this.places.set(places);
+      },
+      error: (error: { message: string; }) => {
+        this.error.set(error.message);
+      },
+      complete: () => this.isFetching.set(false),
+    });
 
     this.destroyRef.onDestroy(() => {
       subscription.unsubscribe();
