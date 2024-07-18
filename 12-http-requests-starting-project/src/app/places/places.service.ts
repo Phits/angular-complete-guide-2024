@@ -19,7 +19,11 @@ export class PlacesService {
   }
 
   loadUserPlaces() {
-    return this.fetchPlaces('http://localhost:3000/user-places', 'There was an error when fetching your favorite places.');
+    return this.fetchPlaces('http://localhost:3000/user-places', 'There was an error when fetching your favorite places.')
+      .pipe(
+        tap({
+          next: (userPlaces) => this.userPlaces.set(userPlaces)
+        }));
   }
 
   addPlaceToUserPlaces(place: Place) {

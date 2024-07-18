@@ -23,16 +23,15 @@ export class AvailablePlacesComponent implements OnInit {
   ngOnInit() {
     this.isFetching.set(true);
     const subscription =
-      this.placesService.loadAvailablePlaces()
-        .subscribe({
-          next: (places) => {
-            this.places.set(places);
-          },
-          error: (error) => {
-            this.error.set(error.message);
-          },
-          complete: () => this.isFetching.set(false),
-        });
+      this.placesService.loadAvailablePlaces().subscribe({
+        next: (places) => {
+          this.places.set(places);
+        },
+        error: (error) => {
+          this.error.set(error.message);
+        },
+        complete: () => this.isFetching.set(false),
+      });
 
     this.destroyRef.onDestroy(() => {
       subscription.unsubscribe();
