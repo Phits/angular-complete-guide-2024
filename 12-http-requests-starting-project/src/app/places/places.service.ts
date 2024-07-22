@@ -46,7 +46,22 @@ export class PlacesService {
     );
   }
 
-  removeUserPlace(place: Place) { }
+  removeUserPlace(place: Place) {
+    const previousPlaces = this.userPlaces();
+
+    if (previousPlaces.some((p) => p.id === place.id)) {
+      this.userPlaces.set(previousPlaces.filter(p => p.id !== place.id));
+    }
+
+    return this.httpClient.delete(`http://localhost:3000/user-places/${place.id}`).pipe(
+      catchError((error) => {
+        this.userPlaces.set(previousPlaces);
+        this.errorService.showError('Failed to remove selected place.');
+        return throwError(() => new Error())
+      })
+    );
+
+  }
 
   private fetchPlaces(url: string, errorMessage: string) {
     return this.httpClient
