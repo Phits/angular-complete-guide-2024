@@ -21,15 +21,14 @@ import {
 })
 export class LifecycleComponent
   implements
-    OnInit,
-    OnChanges,
-    DoCheck,
-    AfterContentInit,
-    AfterContentChecked,
-    AfterViewInit,
-    AfterViewChecked,
-    OnDestroy
-{
+  OnInit,
+  OnChanges,
+  DoCheck,
+  AfterContentInit,
+  AfterContentChecked,
+  AfterViewInit,
+  AfterViewChecked,
+  OnDestroy {
   @Input() text?: string;
 
   constructor() {
@@ -46,6 +45,7 @@ export class LifecycleComponent
   }
 
   ngDoCheck() {
+    // Try not to use because it is called very frequently
     console.log('ngDoCheck');
   }
 
