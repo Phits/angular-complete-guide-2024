@@ -1,3 +1,21 @@
+<div>
+    <ul>
+        @for (ticket of tickets; track ticket.id) {
+        <li>
+            <app-ticket />
+            <!--  Help Variables 17 or later
+            {{ $first }}
+            {{ $last }}
+            {{ $odd }}
+            {{ $even }}
+            {{ $count }} -->
+        </li>
+        } @empty {
+        <li>No tickets found</li>
+        }
+    </ul>
+</div>
+
 <div id="new-ticket">
-    <app-new-ticket />
+    <app-new-ticket (add)="onAdd($event)" />
 </div>
