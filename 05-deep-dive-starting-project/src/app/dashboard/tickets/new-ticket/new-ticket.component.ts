@@ -16,6 +16,8 @@ export class NewTicketComponent implements OnInit, AfterViewInit {
 
   // Old way
   // @Output() add = new EventEmitter<{ title: string, request: string }>();
+  enteredTitle = '';
+  enteredText = '';
 
   // Modern way
   add = output<{
@@ -39,13 +41,13 @@ export class NewTicketComponent implements OnInit, AfterViewInit {
     console.log('form', this.form?.nativeElement);
   }
 
-  onSubmit(titleInput: string, textInput: string) {
+  onSubmit() {
     // console.dir(titleInput);
     // console.log(titleInput);
 
     this.add.emit({
-      title: titleInput,
-      request: textInput
+      title: this.enteredTitle,
+      request: this.enteredText
     });
 
     this.form?.nativeElement.reset();
